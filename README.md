@@ -10,7 +10,9 @@ This editor runs entirely without a backend and is a completely static site, whi
 Even though the library's primarily designed for p5.js, you can still upload libraries in the form of javascript files to load them into the animator.
 To use your animation simply follow the template and extend the Animation class in [animator.js](https://github.com/RandomGamingDev/AnimatorJs/blob/main/animation.js). Once you're done creating your animation, you can simply take the file and the `Animation` class from [animator.js](https://github.com/RandomGamingDev/AnimatorJs/blob/main/animation.js) and drop it into your project and make `disp` point at the canvas that you want to draw on in order to use it within your own project.
 
-Export to Webm by pressing the download button! (There are however several limitations due to the restrictions placed by the browser, number 1, webm isn't exactly interactable so any of that stuff will be lost, as well as the loss of things like audio since we can't record that. Everything else works though)
+Export to Webm by pressing the download button! 
+(There are however several limitations due to the restrictions placed by the browser, number 1, webm isn't exactly interactable so any of that stuff will be lost, as well as the loss of things like audio since we can't record that. Everything else works though)
+Something nice however is that webm will export at the desired fps even if the rendering is resource intensive.
 
 Write the actual code for the animation in the `animationFrame()` function of your class.
 
