@@ -13,6 +13,7 @@ To use your animation simply follow the template and extend the Animation class 
 Export to Webm by pressing the download button! 
 (There are however several limitations due to the restrictions placed by the browser, number 1, webm isn't exactly interactable so any of that stuff will be lost, as well as the loss of things like audio since we can't record that. Everything else works though)
 Something nice however is that webm will export at the desired fps even if the rendering is resource intensive.
+Although you do have to keep the tab and browser open for it to continue rendering since p5.js doesn't call `draw` unless both of those are true. I could probably use Web Workers to get it working even when the tab's closed, but tbh I don't feel like if. If you'd like to add that feature however, I'll be happy to add your pull request!
 
 Write the actual code for the animation in the `animationFrame()` function of your class.
 
