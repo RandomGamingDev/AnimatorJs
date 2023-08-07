@@ -27,9 +27,13 @@ function handleFile(file) {
   switch (file.type) {
     case "application":
       eval(new TextDecoder().decode(base64ToBytes(file.data.slice(37))));
+      animation.loadEditorSettings();
       break;
     case "text":
       eval(file.data);
+      animation.loadEditorSettings();
+      break;
+    default:
       break;
   }
 }
