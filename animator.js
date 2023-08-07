@@ -32,11 +32,13 @@ class Animation {
       Math.floor(this.progress / this.step) * this.step;
   }
 
-  tick() {
+  tick(useDeltaTime) {
     this.animationFrame(this.stepProgress());
 
     if (this.playing)
-      this.progress += (deltaTime / 1000) * this.speed;
+      this.progress += useDeltaTime ?
+        (deltaTime / 1000) * this.speed :
+        1000 / this.framerate * this.speed;
 
     if (this.loop) {
       this.progress %= 1;

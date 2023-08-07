@@ -138,7 +138,7 @@ function draw() {
       [0, (vwH - dims[1]) / 2] :
       [(width - dims[0]) / 2, 0];
 
-  animation.tick();
+  animation.tick(capturer == undefined);
 
   if (capturer == undefined)
     image(animation.disp, off[0], off[1], dims[0], dims[1]);
