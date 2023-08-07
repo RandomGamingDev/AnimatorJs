@@ -1,4 +1,4 @@
-const clamp = () => Math.min(Math.max(num, min), max);
+const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
 // The animation
 let animation;
