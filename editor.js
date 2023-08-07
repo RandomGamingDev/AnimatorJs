@@ -1,7 +1,3 @@
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
-
 const clamp = () => Math.min(Math.max(num, min), max);
 
 // The animation
@@ -9,6 +5,8 @@ let animation;
 
 let draggingProgress = false;
 let fileInput;
+
+let capturer;
 
  // Progress bar
 const progressBar = {
@@ -18,23 +16,33 @@ const progressBar = {
   timelineW: () => width - (progressBar.iconSize * 3 + progressBar.spacing * 5)
 }
 
+function windowResized() {
+  if (capturer == undefined)
+    resizeCanvas(windowWidth, windowHeight);
+}
+
 function base64ToBytes(base64) {
   const binString = window.atob(base64);
   return Uint8Array.from(binString, (m) => m.codePointAt(0));
 }
 
 function handleFile(file) {
-  switch (file.type) {
-    case "application":
-      eval(new TextDecoder().decode(base64ToBytes(file.data.slice(37))));
-      animation.loadEditorSettings();
-      break;
-    case "text":
-      eval(file.data);
-      animation.loadEditorSettings();
-      break;
-    default:
-      break;
+  try {
+    switch (file.type) {
+      case "application":
+        eval(new TextDecoder().decode(base64ToBytes(file.data.slice(37))));
+        animation.loadEditorSettings();
+        break;
+      case "text":
+        eval(file.data);
+        animation.loadEditorSettings();
+        break;
+      default:
+        break;
+    }
+  }
+  catch (error) {
+    console.log(`We were unable to load the file because of : ${error}`)
   }
 }
 
@@ -130,8 +138,20 @@ function draw() {
       [0, (vwH - dims[1]) / 2] :
       [(width - dims[0]) / 2, 0];
 
- animation.tick();
- image(animation.disp, off[0], off[1], dims[0], dims[1]);
+  animation.tick();
+
+  if (capturer == undefined)
+    image(animation.disp, off[0], off[1], dims[0], dims[1]);
+  else {
+    image(animation.disp, 0, 0, width, height);
+    capturer.capture(document.getElementById("defaultCanvas0"));
+    capturer.framesLeft--;
+    console.log(capturer.framesLeft);
+    if (capturer.framesLeft < 0) {
+      capturer = undefined;
+      windowResized();
+    }
+  }
 }
 
 function mouseMoved() {
@@ -179,10 +199,18 @@ function mouseClicked() {
     fileInput.elt.click();
     return;
   }
-  if (mouseX > width - (progressBar.iconSize + progressBar.spacing) && mouseX < width - progressBar.spacing) {
-    // make it so that this downloads the video
-    //https://github.com/spite/ccapture.js/blob/master/README.md#using-the-code
-    //https://github.com/andr-ew/ccapture.js-examples/blob/main/example_p5.html
+  if (animation != undefined && mouseX > width - (progressBar.iconSize + progressBar.spacing) && mouseX < width - progressBar.spacing) {
+    capturer = new CCapture({
+        format: 'webm',
+        framerate: animation.framerate,
+        timeLimit: 1 / animation.speed,
+        display: true,
+    });
+    capturer.framesLeft = animation.framerate * (1 / animation.speed);
+    resizeCanvas(animation.disp.width, animation.disp.height);
+    animation.playing = true;
+    animation.progress = 0;
+    capturer.start();
     return;
   }
 }

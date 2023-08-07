@@ -8,9 +8,11 @@ class Animation {
     this.speed = speed;
     this.loop = loop;
 
+    // Export to webm settings
+    this.framerate = framerate; 
+
     // Editor settings
     this.smooth = smooth;
-    this.framerate = framerate;
   }
 
   loadEditorSettings() {
@@ -18,7 +20,6 @@ class Animation {
       smooth();
     else
       noSmooth();
-    frameRate(animation.framerate);
   }
 
   clamp(num, min, max) {
