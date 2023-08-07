@@ -38,7 +38,7 @@ class Animation {
     if (this.playing)
       this.progress += useDeltaTime ?
         (deltaTime / 1000) * this.speed :
-        1000 / this.framerate * this.speed;
+        (1 / this.framerate) * this.speed;
 
     if (this.loop) {
       this.progress %= 1;
