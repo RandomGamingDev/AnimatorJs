@@ -1,6 +1,8 @@
 # AnimatorJs
 A javascript animation viewer based on a custom animation API primarily designed for p5.js
 
+<img src="AnimatorJs.png" width="512" />
+
 You can use the editor here: https://randomgamingdev.github.io/AnimatorJs/
 
 If you want to modify it, for instance to by default add your own library, simply fork this repo, add it into [index.html](https://github.com/RandomGamingDev/AnimatorJs/blob/main/index.html) and then set up Github Pages.
