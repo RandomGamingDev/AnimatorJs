@@ -1,7 +1,9 @@
 # AnimatorJs
-A javascript animation viewer based on a custom animation API primarily designed for p5.js
+A javascript animation viewer based on a custom animation API primarily designed for p5.js and allows for dynamic, lightweight, real-time rendered browser animations controlled purely by code.
 
 <img src="AnimatorJs.png" width="512" />
+
+(This differs from projects like Motion Canvas since it's meant for smaller lightweight animations that are to be rendered in real time like in games or web applications)
 
 You can use the editor here: https://randomgamingdev.github.io/AnimatorJs/
 
